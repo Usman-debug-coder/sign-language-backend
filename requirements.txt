@@ -1,0 +1,11 @@
+openai-whisper
+ffmpeg-python
+nltk
+opencv-python-headless
+mediapipe
+numpy
+flask
+flask-cors
+werkzeug
+pygltflib
+gunicorn
