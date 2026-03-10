@@ -1,13 +1,11 @@
 services:
   - type: web
     name: sign-language-api
-    runtime: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT --timeout 600 --workers 1 --threads 4
+    runtime: docker
+    repo: https://github.com/Usman-debug-coder/sign-language-backend.git
+    plan: free
     envVars:
       - key: WHISPER_MODEL
         value: tiny
       - key: ALLOWED_ORIGINS
         value: "*"
-      - key: PYTHON_VERSION
-        value: "3.11.0"
