@@ -3,11 +3,10 @@ import json
 import os
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict, Iterable, List, Optional, Tuple
+from typing import Any, Dict, Iterable, List, Optional, Tuple
 
 import cv2
 import mediapipe as mp
-from mediapipe.framework.formats import landmark_pb2
 import numpy as np
 
 Holistic = mp.solutions.holistic.Holistic
@@ -179,7 +178,7 @@ def _vector_to_quaternion(vec: np.ndarray) -> Tuple[float, float, float, float]:
 
 
 def _landmarks_to_samples(
-    landmarks: Iterable[landmark_pb2.Landmark],
+    landmarks: Iterable[Any],
     parents: Dict[int, int],
     names: Iterable[Optional[str]],
 ) -> Dict[str, JointSample]:
