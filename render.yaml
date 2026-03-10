@@ -12,4 +12,4 @@ services:
       - key: ALLOWED_ORIGINS
         value: "*"
       - key: PYTHON_VERSION
-        value: "3.11.0"
+        value: "3.10.12"

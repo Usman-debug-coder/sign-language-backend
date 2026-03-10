@@ -6,13 +6,9 @@ from flask import Flask, request, jsonify, send_file
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
 import traceback
-import whisper
 
-from run_full_pipeline import run_pipeline
-from gloss_converter import to_gloss
-from gloss_to_video import gloss_to_video_sequence
-from keypoint_extractor import extract_keypoints
-from keypoint_retarget import retarget
+# Heavy ML imports are deferred to processing time to avoid startup crashes
+# when mediapipe/whisper aren't fully available on the deploy platform yet.
 
 app = Flask(__name__)
 
@@ -51,6 +47,13 @@ def process_audio(job_id, audio_path, avatar_path, output_path, keypoints_dir):
             'video_sequence': None,
             'keypoint_files': None
         }
+
+        # Lazy imports — heavy ML modules loaded only when processing starts
+        import whisper
+        from gloss_converter import to_gloss
+        from gloss_to_video import gloss_to_video_sequence
+        from keypoint_extractor import extract_keypoints
+        from keypoint_retarget import retarget
         
         # 1) AUDIO -> TEXT
         jobs[job_id]['progress'] = 10
