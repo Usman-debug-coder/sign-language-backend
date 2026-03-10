@@ -3,8 +3,16 @@
 
 set -e
 
-# Install FFmpeg (needed by whisper and ffmpeg-python)
-apt-get update && apt-get install -y --no-install-recommends ffmpeg
+# Install system dependencies
+# FFmpeg: needed by whisper and ffmpeg-python
+# GL/X11 libs: needed by mediapipe native binaries
+apt-get update && apt-get install -y --no-install-recommends \
+    ffmpeg \
+    libgl1-mesa-glx \
+    libglib2.0-0 \
+    libsm6 \
+    libxrender1 \
+    libxext6
 
 # Install Python dependencies
 pip install --upgrade pip
